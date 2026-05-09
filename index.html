@@ -13,112 +13,103 @@
     body { overflow: hidden; font-family: sans-serif; background: #c4a882; }
 
     #pantalla-inicio {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: linear-gradient(180deg, #c4a882 0%, #d4b896 40%, #c8a070 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 32px 24px;
-      text-align: center;
-      overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 9999; padding: 32px 24px;
+      text-align: center; overflow: hidden;
     }
     .sol {
-      position: absolute;
-      top: 22px; right: 34px;
+      position: absolute; top: 22px; right: 34px;
       width: 48px; height: 48px;
       background: radial-gradient(circle, #ffe066 60%, #ffb300 100%);
-      border-radius: 50%;
-      box-shadow: 0 0 22px #ffb30099;
+      border-radius: 50%; box-shadow: 0 0 22px #ffb30099;
     }
     .ilustracion {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      width: 100%;
-      pointer-events: none;
+      position: absolute; bottom: 0; left: 0; right: 0;
+      width: 100%; pointer-events: none;
     }
     img.logo {
-      width: 78px; height: 78px;
-      object-fit: contain;
-      margin-bottom: 10px;
-      position: relative; z-index: 3;
+      width: 78px; height: 78px; object-fit: contain;
+      margin-bottom: 10px; position: relative; z-index: 3;
       filter: drop-shadow(0 2px 6px #00000033);
     }
     .colegio-nombre {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: #5a3a10; margin-bottom: 2px;
-      position: relative; z-index: 3;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: #5a3a10;
+      margin-bottom: 2px; position: relative; z-index: 3;
     }
     .colegio-lema {
       font-size: 12px; font-weight: 700; font-style: italic;
-      color: #7a4a18; margin-bottom: 16px;
-      position: relative; z-index: 3;
+      color: #7a4a18; margin-bottom: 16px; position: relative; z-index: 3;
     }
     h1 {
-      font-size: 20px; font-weight: 900;
-      color: #2a1a08; line-height: 1.3;
-      margin-bottom: 22px;
-      position: relative; z-index: 3;
+      font-size: 20px; font-weight: 900; color: #2a1a08;
+      line-height: 1.3; margin-bottom: 22px; position: relative; z-index: 3;
     }
     h1 em { color: #5a3a10; font-style: italic; }
     #btn-iniciar {
-      background: #7a4a18; color: #f5e6c8;
-      border: none; padding: 16px 0;
-      width: 100%; max-width: 260px;
-      font-size: 15px; font-weight: 900;
-      border-radius: 50px; cursor: pointer;
-      position: relative; z-index: 3;
+      background: #7a4a18; color: #f5e6c8; border: none;
+      padding: 16px 0; width: 100%; max-width: 260px;
+      font-size: 15px; font-weight: 900; border-radius: 50px;
+      cursor: pointer; position: relative; z-index: 3;
       box-shadow: 0 4px 14px #00000033;
     }
     .instruccion-texto {
-      font-size: 12px; color: #5a3a10;
-      margin-top: 14px;
-      position: relative; z-index: 3;
-      font-weight: 600;
+      font-size: 12px; color: #5a3a10; margin-top: 14px;
+      position: relative; z-index: 3; font-weight: 600;
     }
 
-    /* Video overlay — encima de la cámara AR, fuera del marcador */
-    #video-overlay {
+    /* Cámara de fondo */
+    #camara-fondo {
+      display: none;
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* Video del alumno encima de la cámara */
+    #video-alumno {
       display: none;
       position: fixed;
-      bottom: 80px;
-      left: 50%;
+      bottom: 80px; left: 50%;
       transform: translateX(-50%);
-      width: 260px;
-      z-index: 998;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    #video-overlay video {
-      width: 100%;
-      display: block;
+      width: 75vw;
+      max-width: 320px;
+      z-index: 10;
+      border-radius: 8px;
     }
 
     #instruccion {
-      position: fixed;
-      bottom: 24px; left: 50%;
+      position: fixed; bottom: 24px; left: 50%;
       transform: translateX(-50%);
       background: rgba(90, 58, 16, 0.88);
-      color: #f5e6c8;
-      padding: 10px 22px;
-      border-radius: 30px;
-      font-size: 14px; font-weight: 700;
-      z-index: 999;
+      color: #f5e6c8; padding: 10px 22px;
+      border-radius: 30px; font-size: 14px;
+      font-weight: 700; z-index: 999;
+      display: none; text-align: center;
+      border: 1px solid #7a4a18; white-space: nowrap;
+    }
+
+    #btn-play {
       display: none;
-      text-align: center;
-      border: 1px solid #7a4a18;
-      white-space: nowrap;
+      position: fixed; bottom: 70px; left: 50%;
+      transform: translateX(-50%);
+      background: #7a4a18; color: #f5e6c8;
+      border: none; padding: 14px 32px;
+      font-size: 15px; font-weight: 900;
+      border-radius: 50px; cursor: pointer;
+      z-index: 999; box-shadow: 0 4px 14px #00000055;
     }
   </style>
 </head>
 <body>
 
+  <!-- Pantalla de bienvenida -->
   <div id="pantalla-inicio">
     <div class="sol"></div>
-
     <svg class="ilustracion" viewBox="0 0 340 180" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="170" cy="175" rx="200" ry="20" fill="#a0784a" opacity="0.5"/>
       <rect x="30" y="60" width="18" height="110" rx="9" fill="#5a7a3a"/>
@@ -154,52 +145,46 @@
     <p class="instruccion-texto">📍 Apunta la cámara al marcador</p>
   </div>
 
-  <!-- Video flotante encima de la cámara, independiente del marcador -->
-  <div id="video-overlay">
-    <video id="mi-video" src="real de catorce.webm" loop playsinline webkit-playsinline crossorigin="anonymous"></video>
-  </div>
+  <!-- Cámara de fondo -->
+  <video id="camara-fondo" autoplay playsinline muted></video>
 
-  <div id="instruccion">🌵 Apunta al marcador para iniciar</div>
+  <!-- Video del proyecto encima -->
+  <video id="video-alumno" src="real de catorce.webm" loop playsinline webkit-playsinline crossorigin="anonymous"></video>
 
-  <a-scene
-    id="escena-ar"
-    embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;"
-    renderer="logarithmicDepthBuffer: true; antialias: true;"
-    vr-mode-ui="enabled: false"
-    style="display:none;"
-  >
-    <a-marker preset="hiro" id="marcador">
-      <!-- Marcador vacío: solo detecta, el video se maneja por separado -->
-      <a-box position="0 0 0" scale="0.001 0.001 0.001"></a-box>
-    </a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
+  <!-- Botón para iniciar el video manualmente -->
+  <button id="btn-play" onclick="reproducirVideo()">▶️ &nbsp; Ver Real de Catorce</button>
+
+  <div id="instruccion">🌵 Toca el botón para ver el video</div>
 
   <script>
-    var videoIniciado = false;
-
-    function iniciarAR() {
+    async function iniciarAR() {
       document.getElementById('pantalla-inicio').style.display = 'none';
-      document.getElementById('escena-ar').style.display = 'block';
+
+      // Activar cámara trasera como fondo
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'environment' }
+        });
+        const camaraEl = document.getElementById('camara-fondo');
+        camaraEl.srcObject = stream;
+        camaraEl.style.display = 'block';
+      } catch(e) {
+        console.warn('Cámara no disponible:', e);
+      }
+
+      // Mostrar botón e instrucción
+      document.getElementById('btn-play').style.display = 'block';
       document.getElementById('instruccion').style.display = 'block';
+    }
 
-      const marcador = document.getElementById('marcador');
-      const overlay = document.getElementById('video-overlay');
-      const video = document.getElementById('mi-video');
+    function reproducirVideo() {
+      const video = document.getElementById('video-alumno');
+      const btn = document.getElementById('btn-play');
 
-      marcador.addEventListener('markerFound', () => {
-        if (!videoIniciado) {
-          // Primera vez que ve el marcador: muestra y reproduce el video
-          overlay.style.display = 'block';
-          video.play();
-          videoIniciado = true;
-          document.getElementById('instruccion').textContent = '✨ ¡Real de Catorce encontrado!';
-        }
-        // Si ya inició, no hace nada — el video sigue solo
-      });
-
-      // markerLost no hace nada — el video continúa siempre
+      video.style.display = 'block';
+      video.play();
+      btn.style.display = 'none';
+      document.getElementById('instruccion').textContent = '✨ ¡Real de Catorce!';
     }
   </script>
 
